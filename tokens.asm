@@ -25,54 +25,10 @@ include     include/kernel.inc
 o_findtkn:  equ   0030h
 o_idnum:    equ   0033h
 
-
-            ; VDP port assignments
-
-#define     EXP_PORT  1                 ; port expander address if in use
-#define     VDP_GROUP 1                 ; port group of the video card
-
-#define     VDP_REG 7                   ; address of the 9918 register port
-#define     VDP_RAM 6                   ; address of the 9918 memory port
-
-#define     VDP_RAM_R 00h               ; flag for memory read operation
-#define     VDP_RAM_W 40h               ; flag for memory write operation
-#define     VDP_REG_W 80h               ; flag for register write operation
-
-#define     PS2_P b2                    ; ps/2 port positive polarity test
-#define     PS2_N bn2                   ; ps/2 port negative polarity test
-
 #define     null 0                      ; better for empty pointers than 0
 
-
-            ; 9918 constant values
-
-blue:       equ   4
-red:        equ   6
-green:      equ   12
-gray:       equ   14
-white:      equ   15
-
-fgcolor:    equ   white
-bgcolor:    equ   blue
-
-
-            ; Control characters
-
-etx:        equ   3
-bs:         equ   8
 lf:         equ   10
 cr:         equ   13
-del:        equ   127
-
-
-            ; table constants and locations
-
-rows:       equ   24
-cols:       equ   40
-chars:      equ   rows*cols
-
-pattern:    equ   3800h                 ; character set in video memory
-names:      equ   3c00h                 ; display data in video memory
 
 
             ; Executable program header
@@ -88,11 +44,11 @@ start:      br    main
             ; Build information
 
             db    6+80h                 ; month
-            db    3                     ; day
+            db    17                    ; day
             dw    2022                  ; year
-            dw    2                     ; build
+            dw    1                     ; build
 
-            db    'See github.com/dmadole/Elfos-pstwo for more info',0
+            db    'See github.com/dmadole/Elfos-tokens for more info',0
 
 
             ; Check minimum kernel version we need before doing anything else,
@@ -146,7 +102,7 @@ skipspc:    lda   ra                    ; skip any leading spaces
 
 badusage:   sep   scall                 ; if incorrect syntax then quit
             dw    o_inmsg
-            db    'ERROR: Usage: pstwo [-u]',cr,lf,0
+            db    'ERROR: Usage: tokens [-u]',cr,lf,0
             sep   sret
 
 
