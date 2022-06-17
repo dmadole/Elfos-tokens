@@ -22,8 +22,8 @@ include     include/kernel.inc
 
             ; Hooks for loadable token routines
 
-o_findtkn:  equ   0040h
-o_idnum:    equ   0043h
+o_findtkn:  equ   0030h
+o_idnum:    equ   0033h
 
 
             ; VDP port assignments
